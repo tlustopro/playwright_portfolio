@@ -10,8 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.53.2-jammy
+      options: --user 1001
+    env:
+      HOME: /tmp
+    defaults:
+      run:
+        working-directory: /tmp
     steps:
     - uses: actions/checkout@v4
+      with:
+        path: /tmp
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
