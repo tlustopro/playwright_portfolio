@@ -13,6 +13,7 @@
   - Specify timeouts and wait conditions for asynchronous actions.
   - Use only supported selectors and locators for UI automation.
   - If we are talking about password and other secret strings, save them properly in some secret way
+  - Always suggest easiest solution whenever possible
 - **Examples:**
   - "Login with valid credentials and verify dashboard loads."
   - "Check that error message appears when submitting empty form."
