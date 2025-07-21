@@ -1,5 +1,5 @@
-import { test, expect } from '../src/test-fixtures';
-import { HomePage } from '../src/page/homePage';
+import { test, expect } from '../fixtures/test-fixtures';
+import { HomePage } from '../page/homePage';
 
 test.describe('Homepage', () => {
   test('should load successfully', async ({ page }, testInfo) => {
@@ -11,5 +11,5 @@ test.describe('Homepage', () => {
       await page.screenshot({ path: `test-results/homepage-failure-${testInfo.project.name}.png`, fullPage: true });
       throw error;
     }
-  });
+  })
 });
