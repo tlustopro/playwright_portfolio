@@ -1,14 +1,31 @@
-import { test as base, expect } from '@playwright/test';
+import { test as base } from '@playwright/test';
+import { LoginPage } from '../page/loginPage';
+import { InventoryPage } from '../page/homePage';
 
-const test = base.extend({
-  page: async ({ page }, use, testInfo) => {
-    try {
-      await use(page);
-    } catch (error) {
-      await page.screenshot({ path: `test-results/failure-${testInfo.title}-${testInfo.project.name}.png`, fullPage: true });
-      throw error;
-    }
+export const test = base.extend({
+  loginPage: async ({ page }, use) => {
+    await use(new LoginPage(page));
   },
+  inventoryPage: async ({ page }, use) => {
+    await use(new InventoryPage(page));
+  }
 });
 
-export { test, expect };
+export const USERS = {
+  STANDARD: {
+    username: 'standard_user',
+    password: 'secret_sauce'
+  },
+  LOCKED: {
+    username: 'locked_out_user',
+    password: 'secret_sauce'
+  },
+  PROBLEM: {
+    username: 'problem_user',
+    password: 'secret_sauce'
+  },
+  PERFORMANCE_GLITCH: {
+    username: 'performance_glitch_user',
+    password: 'secret_sauce'
+  }
+};

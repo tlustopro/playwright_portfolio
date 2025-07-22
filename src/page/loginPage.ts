@@ -5,19 +5,24 @@ export class LoginPage {
   constructor(private page: Page) {}
 
   async goto() {
-    await this.page.goto('https://www.rohlik.cz');
-    await this.page.click('[data-test="header-user-icon"]');
+    await this.page.goto('https://www.saucedemo.com/v1/');
   }
 
   async login(username: string, password: string) {
-    await this.page.fill('input[type="email"]', username);
-    await this.page.fill('input[type="password"]', password);
-    await this.page.click('button[type="submit"]');
+    await this.page.fill('[data-test="username"]', username);
+    await this.page.fill('[data-test="password"]', password);
+    await this.page.click('[type="submit"]');
   }
 
   async isLoggedIn() {
-    const userIcon = this.page.locator('[data-test="header-user-icon"]');
-    await expect(userIcon).toHaveText("DA", { timeout: 10000 }); // waits up to 10s
+    const inventoryContainer = this.page.locator('.inventory_container');
+    await expect(inventoryContainer).toBeVisible({ timeout: 10000 }); // waits up to 10s
     return true;
   }
+
+  async getErrorMessage() {
+    const errorMessage = this.page.locator('[data-test="error"]');
+    return await errorMessage.textContent();
+    await expect(errorMessage).toHaveText("Epic sadface", { timeout: 10000 }); // waits up to 10s  
+    }
 } 
