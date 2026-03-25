@@ -18,14 +18,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+          cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Create .env file from secrets
-        run: |
-          echo "LOGIN_USERNAME=\"${{ secrets.LOGIN_USERNAME }}\"" >> .env
-          echo "LOGIN_PASSWORD=\"${{ secrets.LOGIN_PASSWORD }}\"" >> .env
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npm test
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

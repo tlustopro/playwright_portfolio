@@ -1,12 +1,11 @@
-import { Page } from '@playwright/test';
-import { expect } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 
 export class CartPage {
   constructor(private page: Page) {}
 
   async isLoaded() {
     await expect(this.page.locator('.cart_list')).toBeVisible();
-    return true;
+    await expect(this.page).toHaveURL(/cart\.html/);
   }
 
   async getCartItems() {
@@ -25,7 +24,7 @@ export class CartPage {
 
   async getItemPrice(itemName: string): Promise<string> {
     const cartItem = this.page.locator('.cart_item').filter({ hasText: itemName });
-    return await cartItem.locator('.inventory_item_price').textContent() || '';
+    return (await cartItem.locator('.inventory_item_price').textContent())?.trim() ?? '';
   }
 
   async removeItem(itemName: string) {
@@ -35,6 +34,7 @@ export class CartPage {
 
   async continueShopping() {
     await this.page.click('.cart_footer .btn_secondary');
+    await expect(this.page).toHaveURL(/inventory\.html/);
   }
 
   async checkout() {

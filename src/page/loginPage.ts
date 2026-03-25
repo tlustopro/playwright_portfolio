@@ -1,5 +1,4 @@
-import { Page } from '@playwright/test';
-import { expect } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 
 export class LoginPage {
   constructor(private page: Page) {}
@@ -16,13 +15,13 @@ export class LoginPage {
 
   async isLoggedIn() {
     const inventoryContainer = this.page.locator('.inventory_container');
-    await expect(inventoryContainer).toBeVisible({ timeout: 10000 }); // waits up to 10s
-    return true;
+    await expect(inventoryContainer).toBeVisible({ timeout: 10000 });
+    await expect(this.page).toHaveURL(/inventory\.html/);
   }
 
   async getErrorMessage() {
     const errorMessage = this.page.locator('[data-test="error"]');
-    return await errorMessage.textContent();
-    await expect(errorMessage).toHaveText("Epic sadface", { timeout: 10000 }); // waits up to 10s  
-    }
-} 
+    await expect(errorMessage).toBeVisible({ timeout: 10000 });
+    return (await errorMessage.textContent())?.trim() ?? '';
+  }
+}

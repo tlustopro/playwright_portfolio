@@ -1,14 +1,24 @@
 {
   "name": "playwright_portfolio",
   "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {},
-  "keywords": [],
-  "author": "",
+  "scripts": {
+    "test": "playwright test",
+    "test:chromium": "playwright test --project=chromium",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report"
+  },
+  "keywords": [
+    "playwright",
+    "typescript",
+    "qa",
+    "automation",
+    "e2e"
+  ],
+  "author": "Denda",
   "license": "ISC",
-  "description": "",
+  "description": "QA automation portfolio project using Playwright and TypeScript against Sauce Demo.",
   "dependencies": {
-    "@faker-js/faker": "^9.9.0",
     "dotenv": "^17.2.0",
     "playwright": "^1.53.2"
   },
