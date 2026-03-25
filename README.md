@@ -4,7 +4,7 @@ This repository is a sample end-to-end test automation project built with [Playw
 
 I use it as a QA engineering portfolio project to demonstrate how I structure UI automation, organize reusable page objects, cover core user flows, and run tests in CI.
 
-The test target is [Sauce Demo](https://www.saucedemo.com/v1/), a common practice site for UI automation.
+The test target is [Sauce Demo](https://www.saucedemo.com), a common practice site for UI automation.
 
 ## What This Project Demonstrates
 
