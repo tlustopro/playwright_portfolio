@@ -11,7 +11,7 @@ The test target is [Sauce Demo](https://www.saucedemo.com), a common practice si
 - Writing end-to-end UI tests with Playwright
 - Organizing automation with the Page Object Model
 - Covering positive and negative login scenarios
-- Validating cart and inventory behavior
+- Validating cart behavior and product collection behavior
 - Running tests across multiple browsers
 - Executing the suite in GitHub Actions
 
@@ -46,6 +46,7 @@ The suite focuses on the kinds of flows a QA engineer would typically prioritize
 - locked user behavior
 - add item to cart
 - remove item from cart
+- product sorting
 - cart content verification
 
 ### 3. Cross-Browser Execution
@@ -92,12 +93,14 @@ playwright_portfolio/
 - error message for a locked-out user
 - error message for invalid credentials
 
-### Inventory
+### Product Collection
 
 - add one item to cart
 - add multiple items to cart
+- sort products by name descending
+- sort products by price low to high
+- sort products by price high to low
 - open the cart from inventory
-- trigger product sorting
 
 ### Cart
 
@@ -173,6 +176,16 @@ Useful local commands:
 File:
 
 - [playwright.yml](/Users/denda/Desktop/playwright_portfolio/.github/workflows/playwright.yml)
+
+## Test Strategy
+
+- The suite prioritizes flows with clear user impact and strong value for UI automation.
+- Login is treated as a critical entry-point flow, so both successful and unsuccessful authentication paths are covered.
+- Product collection scenarios verify sorting and cart-entry actions because they affect product discoverability and the first part of the shopping flow.
+- Cart scenarios verify state consistency between the product collection and cart pages, including item presence, quantity, and price.
+- Reusable Playwright fixtures keep setup centralized and reduce duplication, so tests stay focused on business expectations.
+- Cross-browser execution is included to increase confidence across Chromium, Firefox, and WebKit.
+- The project is intentionally small and portfolio-focused, so the emphasis is on maintainability, readability, and meaningful assertions rather than large test volume.
 
 ## Notes
 
