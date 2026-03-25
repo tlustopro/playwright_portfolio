@@ -65,4 +65,9 @@ export class InventoryPage {
       name.trim()
     );
   }
+  async getProductPrices(): Promise<string[]> {
+    return (await this.page.locator('.inventory_item_price').allTextContents()).map((price) =>
+      price.trim()
+    );
+  }
 }
