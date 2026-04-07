@@ -4,7 +4,7 @@ export class InventoryPage {
   constructor(private page: Page) {}
 
   async goto() {
-    await this.page.goto('https://www.saucedemo.com/v1/inventory.html');
+    await this.page.goto('/inventory.html');
   }
 
   async isLoaded() {

@@ -25,19 +25,28 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: process.env.SAUCEDEMO_BASE_URL ?? 'https://www.saucedemo.com/v1',
+      },
       testMatch: '**/tests/*.spec.ts',
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: {
+        ...devices['Desktop Firefox'],
+        baseURL: process.env.SAUCEDEMO_BASE_URL ?? 'https://www.saucedemo.com/v1',
+      },
       testMatch: '**/tests/*.spec.ts',
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: {
+        ...devices['Desktop Safari'],
+        baseURL: process.env.SAUCEDEMO_BASE_URL ?? 'https://www.saucedemo.com/v1',
+      },
       testMatch: '**/tests/*.spec.ts',
     },
 
