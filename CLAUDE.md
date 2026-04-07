@@ -5,10 +5,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm test                   # Run all tests across Chromium, Firefox, WebKit
+npm test                   # Run all tests across Chromium, Firefox, WebKit + API
 npm run test:chromium      # Run tests in Chromium only
 npm run test:headed        # Run tests with visible browser window
 npm run test:ui            # Interactive Playwright UI mode
+npm run test:api           # Run API tests only (no browser required)
 npm run report             # Open last HTML test report
 ```
 
@@ -80,6 +81,30 @@ expect(await locator.isVisible()).toBe(true)  // wrong — no auto-retry
 
 Never use `page.waitForTimeout()` — it is a code smell. Use web-first assertions or `waitForSelector` only when necessary.
 
+### API Clients
+
+All HTTP interactions are encapsulated in `src/api/`. Each class wraps API requests for one resource, receiving `APIRequestContext` in its constructor.
+
+- **`authClient.ts`** — `login()`, `parseSuccess()`, `parseError()`
+- **`productsClient.ts`** — `getAll()`, `getById()`, `search()`
+- **`cartsClient.ts`** — `getById()`, `add()`
+
+**Rules:**
+- API client methods always return the raw `APIResponse` — never pre-parsed JSON
+- API clients NEVER contain assertions — assertions belong in tests only
+- TypeScript interfaces for response shapes live in `src/types/api.types.ts`
+
+`src/fixtures/api-fixtures.ts` extends base `@playwright/test` (not the UI fixtures) with `authClient`, `productsClient`, `cartsClient`, `apiUsers`, and `authenticatedRequest`.
+
+Import from the API fixtures file in API tests:
+```ts
+import { test, expect } from '../../fixtures/api-fixtures';
+```
+
+API tests live in `src/tests/api/` with the `.api.spec.ts` suffix.
+
 ### Config
 
 `playwright.config.ts` runs fully parallel by default. In CI (detected via `process.env.CI`): 2 retries, 1 worker. Traces are collected on first retry only. Test results go to `test-results/`, reports to `playwright-report/`.
+
+The `api` project targets `https://dummyjson.com` (overridable via `DUMMYJSON_BASE_URL` env var) and only runs files matching `**/tests/api/**/*.spec.ts`. Browser projects only run `**/tests/*.spec.ts`.

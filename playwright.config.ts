@@ -26,16 +26,27 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      testMatch: '**/tests/*.spec.ts',
     },
 
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
+      testMatch: '**/tests/*.spec.ts',
     },
 
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
+      testMatch: '**/tests/*.spec.ts',
+    },
+
+    {
+      name: 'api',
+      use: {
+        baseURL: process.env.DUMMYJSON_BASE_URL ?? 'https://dummyjson.com',
+      },
+      testMatch: '**/tests/api/**/*.spec.ts',
     },
   ],
 });
