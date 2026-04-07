@@ -29,7 +29,7 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         baseURL: process.env.SAUCEDEMO_BASE_URL ?? 'https://www.saucedemo.com/v1',
       },
-      testMatch: '**/tests/*.spec.ts',
+      testMatch: '**/tests/ui/*.spec.ts',
     },
 
     {
@@ -38,7 +38,7 @@ export default defineConfig({
         ...devices['Desktop Firefox'],
         baseURL: process.env.SAUCEDEMO_BASE_URL ?? 'https://www.saucedemo.com/v1',
       },
-      testMatch: '**/tests/*.spec.ts',
+      testMatch: '**/tests/ui/*.spec.ts',
     },
 
     {
@@ -47,7 +47,7 @@ export default defineConfig({
         ...devices['Desktop Safari'],
         baseURL: process.env.SAUCEDEMO_BASE_URL ?? 'https://www.saucedemo.com/v1',
       },
-      testMatch: '**/tests/*.spec.ts',
+      testMatch: '**/tests/ui/*.spec.ts',
     },
 
     {
